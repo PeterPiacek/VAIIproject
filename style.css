@@ -7,6 +7,7 @@ body {
 
 div.riadok {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 div.menu {
