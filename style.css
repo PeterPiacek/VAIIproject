@@ -1,0 +1,73 @@
+body {
+	background-image: url('https://www.solidbackgrounds.com/images/website/950x534/950x534-blue-stained-glass-free-website-background-image.jpg');
+	padding: 0;
+	border: 0;
+	margin: 0;
+}
+
+div.riadok {
+	display: flex;
+}
+
+div.menu {
+	background-color: #cb410b;
+	padding: 1vw;
+	border-radius: 3vw;
+	text-align: center;
+}
+
+div.menu a {
+	color: white;
+	font-size: 3vw;
+	font-family: Arial;
+	font-weight: bold;
+	padding: 1vw;
+	transition: background-color 0.5s, color 0.5s;
+	text-decoration: none;
+}
+
+div.menu a:hover {
+	background-color: white;
+	color: black;
+}
+
+div.foto {
+	padding-left: 0.5%;
+	padding-top: 0.5%;
+}
+
+div.foto img.obrazok{
+	width: 40vw;
+	height:	40vw;
+}
+
+div.foto p {
+	padding: 0;
+	border: 0;
+	margin: 0;
+	text-align: left;
+	font-size: 2vw;
+}
+
+table.plan{
+	background: white;
+	border: 2px solid black;
+}
+
+th{
+	text-align: center;
+	border: 2px solid black;
+	font-size: 1.8vw;
+}
+
+td{
+	text-align: left;
+	border: 1px solid black;
+	font-size: 1vw;
+}
+
+td img {
+	width: 10vw;
+	height:	10vw;
+	float:	left;
+}
