@@ -50,6 +50,11 @@ div.foto p {
 	font-size: 2vw;
 }
 
+div.centering {
+	font-size: 1.1vw;
+	text-align: center;
+}
+
 table.plan{
 	background: white;
 	border: 2px solid black;
@@ -71,4 +76,8 @@ td img {
 	width: 10vw;
 	height:	10vw;
 	float:	left;
+}
+
+input {
+	padding: 4px;
 }
