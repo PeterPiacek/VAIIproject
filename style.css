@@ -58,6 +58,7 @@ div.centering {
 table.plan{
 	background: white;
 	border: 2px solid black;
+	margin: auto;
 }
 
 th{
