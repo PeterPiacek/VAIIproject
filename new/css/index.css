@@ -1,0 +1,31 @@
+
+.menu {
+    background-color:#ccc;
+    text-align: center;
+}
+
+.menu ul {
+    padding-left: 0px;
+    margin: 0px;
+    display: inline-block;
+    list-style-type: none;
+}
+
+.menu ul a {
+    text-decoration: none;
+    color: black;
+    font-size: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-top: none;
+    border-bottom: none;
+    border-right: px, solid, black;
+    border-left: 1px, solid, black;
+}
+
+.menu ul a:hover {
+    transition: color 0.1s;
+    color: #555;
+}
