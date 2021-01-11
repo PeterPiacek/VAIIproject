@@ -1,7 +1,8 @@
 <html>
     <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        
         <link href="css/index.css" rel="stylesheet">
     </head>
     <!--
@@ -30,9 +31,27 @@
             </div>
             <div class="menu">
                 <ul class="col-12 center-block">
-                    <li class="d-md-inline"><a href="#">vzdelavanie</a></li>
-                    <li class="d-md-inline"><a href="#">prispevky</a></li>
-                    <li class="d-md-inline"><a href="#">plan aktivit</a></li>
+                    <li class="d-md-none">dropdown</li>
+                    <li class="d-block d-md-inline-block "><a href="#">vzdelavanie</a>
+                        <ul>
+                            <li><a href="#">ulohy</a>
+                                <ul>
+                                    <li><a href="#">matematika</a></li>
+                                    <li><a href="#">chemia</a></li>
+                                    <li><a href="#">fyzika</a></li>
+                                </ul>
+                            </li>    
+                            <li><a href="#">ucivo</a>
+                                <ul>
+                                    <li><a href="#">matematika</a></li>
+                                    <li><a href="#">chemia</a></li>
+                                    <li><a href="#">fyzika</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="d-block d-md-inline-block"><a href="#">prispevky</a></li>
+                    <li class="d-block d-md-inline-block"><a href="#">plan aktivit</a></li>
                 </ul>
             </div>
         </div>
