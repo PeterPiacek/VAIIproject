@@ -1,1 +1,26 @@
-plan_aktivit
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+        <script src="js/activity_plan.js"></script>
+    </head>
+    <body ng-app="activity_plan">
+        <table ng-controller="plan_controler">
+            <thead>
+                <tr>
+                    <td>Datum</td>
+                    <td>Akcia</td>
+                    <td>Popis</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="plan in cards">
+                    <td>{{plan.datum}}</td>
+                    <td>{{plan.akcia}}</td>
+                    <td>{{plan.popis}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
