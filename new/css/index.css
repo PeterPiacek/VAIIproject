@@ -1,67 +1,3 @@
-
-/*.menu {
-    background-color:#ccc;
-    text-align: center;
-    border-radius: 2px 2px 5px 5px;
-}
-
-.menu ul {
-    padding: 0px;
-    margin: 0px;
-    display: block;
-    list-style-type: none;
-}
-
-.menu li {
-    list-style-type: none;
-    border-right: 1px solid black;
-    position: relative;
-}
-
-.menu li:nth-child(2) {
-    border-left: 1px solid black;
-}
-
-.menu ul a {
-    text-decoration: none;
-    color: black;
-    font-size: 40px;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.menu ul a:hover {
-    transition: color 0.1s;
-    color: #555;
-}
-
-.menu ul li ul {
-    display: none;
-    position: absolute;
-    background-color: #ccc;
-}
-
-.menu li ul li{
-    border: 1px solid black;
-}
-
-.menu ul li:hover ul {
-    display: block;
-}
-
-.menu ul li ul li ul {
-    display: none;
-    position: absolute;
-}
-
-.menu ul li:hover ul li ul {
-    display: none;
-}
-
-.menu ul li ul li:hover ul {
-    display:inline-block;
-}*/
-
 .logo h1 {
     display: inline;
     color: black;
@@ -123,4 +59,29 @@
 
 .dropdown:hover {
     max-height: 1000px;
+}
+
+.searcher {
+    margin: auto;
+    background-color: aqua;
+}
+
+.plan th {
+    text-align: center;
+	border: 2px solid black;
+	font-size: 30px;
+}
+
+.plan table {
+    background: #ddd;
+	border: 2px solid black;
+	margin: auto;
+}
+
+.plan td {
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: left;
+	border: 1px solid black;
+	font-size: 20px;
 }
