@@ -1,1 +1,15 @@
-prispevky
+<html>
+    <head>
+    </head>
+    <body ng-app="articles">
+        <div ng-controller="article_controler" class="prispevky">
+            <div ng-repeat="article in rows">
+                <div>
+                    <span>{{article.clanok}}</span>
+                    <button type="submit" ng-click="zmaz(plan.id)" ng-if="prava.admin" name="Delete">Delete</button>
+                    <button type="submit" ng-click="uprav(plan.id)" ng-if="prava.admin" name="uprav">Uprav</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

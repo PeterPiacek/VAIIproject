@@ -1,16 +1,18 @@
 <div class="logo">
-    <a href="index.php?page=login">
-        <img src="images/placeholder.png" alt="temporary picture" width="100" height="100">
-        <h1>Skola</h1>
+    <a href="index.php?page=prispevky">
+        <img src="images/logo.png" alt="temporary picture" width="100" height="100">
+        <h1>SLVS</h1>
     </a>
 </div>
-<div class="menu dropdown">
-    <span class="d-block d-md-none drop">menu</span>
+<div class="menu dropdown" ng-controller="menu_controler">
+    <span class="d-block d-lg-none drop">menu</span>
     <ul class="col-12 center-block center-text">
-        <li class="d-block d-md-inline"><a href="index.php?page=prispevky">prispevky</a></li>
-        <li class="d-block d-md-inline"><a href="index.php?page=ucivo">ucivo</a></li>
-        <li class="d-block d-md-inline"><a href="index.php?page=ucivo">ulohy</a></li>
-        <li class="d-block d-md-inline"><a href="index.php?page=plan_aktivit">plan aktivit</a></li>
+        <li class="d-block d-lg-inline"><a href="index.php?page=prispevky">prispevky</a></li>
+        <li class="d-block d-lg-inline"><a href="index.php?page=ucivo">ucivo</a></li>
+        <li class="d-block d-lg-inline"><a href="index.php?page=ucivo">ulohy</a></li>
+        <li class="d-block d-lg-inline"><a href="index.php?page=plan_aktivit">plan aktivit</a></li>
+        <li class="d-block d-lg-inline" ng-if="!prava.prihlaseny"><a href="index.php?page=login">prihlasit</a></li>
+        <li class="d-block d-lg-inline" ng-if="prava.prihlaseny"><a href="index.php" ng-click="odhlasenie()">odhlasit sa</a></li>
     </ul>
 </div>
 <div>

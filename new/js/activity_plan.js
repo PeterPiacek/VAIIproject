@@ -1,6 +1,5 @@
-var app = angular.module("activity_plan", ["ngRoute"]);
-
-plan_controler = function($scope, $http) {
+plan_controler = function($scope, $http, prihlasenie) {
+    $scope.prava = prihlasenie;
     $scope.load = function() {
         $scope.rows = [];
         $http({
@@ -22,23 +21,26 @@ plan_controler = function($scope, $http) {
     $scope.load();
 
     $scope.pridaj = function() {
+        var today = new Date();
         var date = new Date($scope.date);
-        var dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-        $scope.pridavok = $.param({
-            date: dateStr,
-            activity: $scope.activity,
-            description: $scope.description,
-        });
-        console.log($scope.pridavok);
-        $http({
-            method: 'POST',
-            url: 'database/database_plan_add.php',
-            data: $scope.pridavok,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function(result){
-            $scope.load();
-            console.log(result);
-        });
+        if ($scope.description && $scope.activity && $scope.date && today <= date) {
+            var dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            $scope.pridavok = $.param({
+                date: dateStr,
+                activity: $scope.activity,
+                description: $scope.description,
+            });
+            console.log($scope.pridavok);
+            $http({
+                method: 'POST',
+                url: 'database/database_plan_add.php',
+                data: $scope.pridavok,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function(result){
+                $scope.load();
+                console.log(result);
+            });
+        }
     }
 
     $scope.zmaz = function(id){

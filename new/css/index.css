@@ -1,3 +1,8 @@
+body{
+    background-image: url('background.jpg');
+    background-repeat: repeat-y; 
+}
+
 .logo h1 {
     display: inline;
     color: black;
@@ -16,7 +21,9 @@
 .menu ul {
     margin: 0;
     padding: 0;
-    background-color:#888;
+    background-color:rgb(224, 224, 224);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .menu li{
@@ -48,6 +55,8 @@
     text-align: center;
     padding: 10px;
     color: #FFF;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .dropdown {
@@ -63,25 +72,42 @@
 
 .searcher {
     margin: auto;
-    background-color: aqua;
+    background-color:rgb(158, 252, 220);
+}
+
+.plan thead tr {
+    background-color: #bbb;
 }
 
 .plan th {
     text-align: center;
-	border: 2px solid black;
-	font-size: 30px;
+    font-size: 30px;
+    
 }
 
 .plan table {
     background: #ddd;
-	border: 2px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	margin: auto;
+}
+
+.plan tr:nth-child(2n) {
+    background-color: #ccc;
 }
 
 .plan td {
     padding-left: 5px;
     padding-right: 5px;
     text-align: left;
-	border: 1px solid black;
 	font-size: 20px;
+}
+
+.plan td:nth-child(n + 2) {
+    border-left: 1px solid black;
+}
+
+.prispevky div div{
+    margin-top: 10px;
+    background-color:rgb(195, 248, 204);
+    padding: 4px 10px 4px 10px;
 }

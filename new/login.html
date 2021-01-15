@@ -1,0 +1,19 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <h3>prihlasenie</h3>
+        <div ng-controller="login_controler">
+            <div ng-if="prava.admin">
+                <span>testing part</span>
+            </div>
+            <form method="POST">
+                <span>meno</span>
+                <input type="text" name="meno" ng-model="name" placeholder="zadajte meno"  required>
+                <span>heslo</pspan>
+                <input type="password" name="heslo" ng-model="password" placeholder="zadajte heslo" required>
+                <input type="submit" ng-click="kontrolaPrihlasenia()" value="Login">
+            </form>
+        </div>
+    </body>
+</html>

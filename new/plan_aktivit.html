@@ -1,9 +1,5 @@
 <html>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
-        <script src="js/activity_plan.js"></script>
     </head>
     <body ng-app="activity_plan">
         <div ng-controller="plan_controler" class="plan d-block">
@@ -16,13 +12,15 @@
                         <td>Datum</td>
                         <td>Akcia</td>
                         <td>Popis</td>
+                        <td ng-if="prava.admin">Funkcie</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="plan in rows | filter:obsahuje">
                         <td>{{plan.datum}}</td>
                         <td>{{plan.akcia}}</td>
-                        <td>{{plan.popis}}
+                        <td>{{plan.popis}}</td>
+                        <td ng-if="prava.admin">
                             <form method="POST" class="d-inline">
                                 <button type="submit" ng-click="zmaz(plan.id)" name="Delete">Delete</button>
                                 <button type="submit" ng-click="uprav(plan.id)" name="uprav">Uprav</button>
@@ -31,12 +29,17 @@
                     </tr>
                 </tbody>
             </table>
-            <form method=POST>
-                <input type="date" name="date" ng-model="date" value="2000-01-01" required>
-                <input type="text" name="activity" ng-model="activity" maxlength="128" required>
-                <input type="text" name="description" ng-model="description" maxlength="1000" required>
-                <input type="submit" ng-click="pridaj()" value="pridaj">
-            </form>
+            <div class="center-text" ng-if="prava.admin">
+                <form method="POST">
+                    <label for="date">Tu si vyberte planovany datum aktivity</label><br>
+                    <input type="date" name="date" ng-model="date" min="2021-1-1" max="2023-1-1" required><br><br>
+                    <label for="activity">Zadajte meno aktivity</label><br>
+                    <input type="text" name="activity" ng-model="activity" minlength="1" maxlength="128" placeholder="meno aktivity" required><br><br>
+                    <label for="description">Zadajte popis pre aktivitu</label><br>
+                    <input type="text" name="description" ng-model="description" minlength="1" maxlength="1000" onkeypress="this.style.width = ((this.value.length + 1) * 8) + 'px';" placeholder="popis aktivity" required><br><br>
+                    <input type="submit" ng-click="pridaj()" value="pridaj">
+                </form>
+            </div>
         </div>
     </body>
 </html>

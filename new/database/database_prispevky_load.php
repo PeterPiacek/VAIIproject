@@ -6,7 +6,7 @@
 	$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	$sql = "SELECT * FROM activityplan ORDER BY date ASC";
+	$sql = "SELECT * FROM articles";
 	$res = $conn->query($sql);
 	$rows = array();
 	while ($data = $res->fetch(PDO::FETCH_ASSOC)) {
