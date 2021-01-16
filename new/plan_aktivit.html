@@ -1,15 +1,16 @@
 <html>
     <head>
+        <link href="css/plan.css" rel="stylesheet">
     </head>
     <body ng-app="activity_plan">
         <div ng-controller="plan_controler" class="plan d-block">
             <div class="searcher">
                 <input ng-change="zmena()" ng-model="obsahuje" placeholder="vyhladaj">
             </div>
-            <table class="center">
+            <table class="center d-none d-sm-inline-block">
                 <thead>
                     <tr>
-                        <td>Datum</td>
+                        <td>Dátum</td>
                         <td>Akcia</td>
                         <td>Popis</td>
                         <td ng-if="prava.admin">Funkcie</td>
@@ -17,26 +18,120 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="plan in rows | filter:obsahuje">
-                        <td>{{plan.datum}}</td>
-                        <td>{{plan.akcia}}</td>
-                        <td>{{plan.popis}}</td>
+                        <td>
+                            <div ng-if="idUprava != plan.id">
+                                {{plan.datum}}
+                            </div>
+                            <div ng-if="idUprava == plan.id">
+                                <input type="date" ng-model="update.date" value="{{plan.datum}}">
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="idUprava != plan.id">
+                                {{plan.akcia}}
+                            </div>
+                            <div ng-if="idUprava == plan.id">
+                                <textarea ng-model="update.activity"></textarea>
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="idUprava != plan.id">
+                                {{plan.popis}}
+                            </div>
+                            <div ng-if="idUprava == plan.id">
+                                <textarea ng-model="update.description"></textarea>
+                            </div>
+                        </td>
                         <td ng-if="prava.admin">
                             <form method="POST" class="d-inline">
-                                <button type="submit" ng-click="zmaz(plan.id)" name="Delete">Delete</button>
-                                <button type="submit" ng-click="uprav(plan.id)" name="uprav">Uprav</button>
+                                <button ng-click="zmaz(plan.id)" name="Delete">Delete</button>
+                                <div ng-if="idUprava != plan.id">
+                                    <button ng-click="zacniUpravu(plan)" name="uprav">Uprav</button>
+                                </div>
+                                <div ng-if="idUprava == plan.id">
+                                    <button ng-click="ukonciUpravu(plan.id)" name="uprav">dokonci</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!--<td>
+                <div ng-if="data.id != idKtoreEditujem">
+                {{ data.text }}
+                </div>
+                <div ng-if="data.id == idKtoreEditujem">
+                <textarea ng-model="data.text">
+                </textarea>
+                </div>
+                </td>-->
+
+
+            <table class="center d-inline-block d-sm-none">
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="plan in rows | filter:obsahuje">
+                    <tr>
+                        <td>dátum</td>
+                        <td>
+                            <div ng-if="idUprava != plan.id">
+                                {{plan.datum}}
+                            </div>
+                            <div ng-if="idUprava == plan.id">
+                                <input type="date" ng-model="update.date" value="{{plan.datum}}">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>akcia</td>
+                        <td>
+                            <div ng-if="idUprava != plan.id">
+                                {{plan.akcia}}
+                            </div>
+                            <div ng-if="idUprava == plan.id">
+                                <textarea ng-model="update.activity"></textarea>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border-bottom: 1px solid black;">
+                            <div ng-if="idUprava != plan.id">
+                                {{plan.popis}}
+                            </div>
+                            <div ng-if="idUprava == plan.id">
+                                <textarea ng-model="update.description"></textarea>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td ng-if="prava.admin" colspan="2" style="border-bottom: 1px solid black;">
+                            <form method="POST" class="d-inline">
+                                <button ng-click="zmaz(plan.id)" name="Delete">Delete</button>
+                                <div ng-if="idUprava != plan.id">
+                                    <button ng-click="zacniUpravu(plan)" name="uprav">Uprav</button>
+                                </div>
+                                <div ng-if="idUprava == plan.id">
+                                    <button ng-click="ukonciUpravu(plan.id)" name="uprav">dokonci</button>
+                                </div>
                             </form>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div class="center-text" ng-if="prava.admin">
+                <h3>Nový príspevok</h3>
                 <form method="POST">
                     <label for="date">Tu si vyberte planovany datum aktivity</label><br>
-                    <input type="date" name="date" ng-model="date" min="2021-1-1" max="2023-1-1" required><br><br>
+                    <input type="date" name="date" ng-model="save.date" min="2021-1-1" max="2023-1-1"><br><br>
                     <label for="activity">Zadajte meno aktivity</label><br>
-                    <input type="text" name="activity" ng-model="activity" minlength="1" maxlength="128" placeholder="meno aktivity" required><br><br>
+                    <input type="text" name="activity" ng-model="save.activity" minlength="1" maxlength="128" placeholder="meno aktivity"><br><br>
                     <label for="description">Zadajte popis pre aktivitu</label><br>
-                    <input type="text" name="description" ng-model="description" minlength="1" maxlength="1000" onkeypress="this.style.width = ((this.value.length + 1) * 8) + 'px';" placeholder="popis aktivity" required><br><br>
+                    <textarea ng-model="save.description" minlength="1" maxlength="1000" placeholder="popis aktivity"></textarea><br><br>
                     <input type="submit" ng-click="pridaj()" value="pridaj">
                 </form>
             </div>

@@ -1,5 +1,6 @@
 plan_controler = function($scope, $http, prihlasenie) {
     $scope.prava = prihlasenie;
+
     $scope.load = function() {
         $scope.rows = [];
         $http({
@@ -20,17 +21,23 @@ plan_controler = function($scope, $http, prihlasenie) {
     }
     $scope.load();
 
+    $scope.save = {
+        description: "",
+        activity: "",
+        date: ""
+    };
+
     $scope.pridaj = function() {
         var today = new Date();
-        var date = new Date($scope.date);
-        if ($scope.description && $scope.activity && $scope.date && today <= date) {
+        var date = new Date($scope.save.date);
+        if ($scope.save.description && $scope.save.activity && $scope.save.date && today <= date) {
             var dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
             $scope.pridavok = $.param({
                 date: dateStr,
-                activity: $scope.activity,
-                description: $scope.description,
+                activity: $scope.save.activity,
+                description: $scope.save.description,
+                author: $scope.prava.name
             });
-            console.log($scope.pridavok);
             $http({
                 method: 'POST',
                 url: 'database/database_plan_add.php',
@@ -38,12 +45,13 @@ plan_controler = function($scope, $http, prihlasenie) {
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(function(result){
                 $scope.load();
-                console.log(result);
+                //console.log(result);
             });
         }
     }
 
     $scope.zmaz = function(id){
+        $scope.idUprava = -1;
         $scope.zmazanie = $.param({
             id: id
         })
@@ -56,24 +64,45 @@ plan_controler = function($scope, $http, prihlasenie) {
             $scope.load();
         });
     }
+    
+    $scope.idUprava = -1;
+    $scope.update = {
+        description: "",
+        activity: "",
+        date: new Date()
+    }
 
-    $scope.uprav = function(id) {
-        var date = new Date($scope.date);
-        var dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-        $scope.uprava = $.param({
-            id: id,
-            date: dateStr,
-            activity: $scope.activity,
-            description: $scope.description,
-        });
-        $http({
-            method: 'POST',
-            url: 'database/database_plan_update.php',
-            data: $scope.uprava,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function(result){
-            $scope.load();
-        });
+    $scope.zacniUpravu = function(plan) {
+        if($scope.idUprava == -1){
+            $scope.idUprava = plan.id;
+            $scope.update.date = new Date(plan.datum);
+            $scope.update.activity = plan.akcia;
+            $scope.update.description = plan.popis;
+        }
+    }
+
+    $scope.ukonciUpravu = function(id) {
+        $scope.idUprava = -1;
+        var today = new Date();
+        var date = new Date($scope.update.date);
+        if ($scope.update.description && $scope.update.activity && $scope.update.date && today <= date) {
+            console.log("after if");
+            var dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            $scope.uprava = $.param({
+                id: id,
+                date: dateStr,
+                activity: $scope.update.activity,
+                description: $scope.update.description,
+            });
+            $http({
+                method: 'POST',
+                url: 'database/database_plan_update.php',
+                data: $scope.uprava,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function(result){
+                $scope.load();
+            });
+        }
     }
 
     $scope.zmena = function() {

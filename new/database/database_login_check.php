@@ -6,7 +6,7 @@
 	$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = $conn->prepare('SELECT email, admin FROM profiles WHERE name LIKE :name and password LIKE :password');
+    $sql = $conn->prepare('SELECT name, admin FROM profiles WHERE name LIKE :name and password LIKE :password');
     $sql->bindParam(':name',$_POST["name"]);
     $sql->bindParam(':password',$_POST["password"]);
     $sql->execute();

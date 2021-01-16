@@ -17,6 +17,10 @@ article_controler = function($scope, $http, prihlasenie) {
     }
     $scope.load();
 
+    /*$scope.pridaj = function() {
+        $scope 
+    }*/
+
     $scope.zmena = function() {
         //console.log($scope.obsahuje);
     }

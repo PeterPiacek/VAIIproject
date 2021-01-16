@@ -10,6 +10,18 @@
                     <button type="submit" ng-click="uprav(plan.id)" ng-if="prava.admin" name="uprav">Uprav</button>
                 </div>
             </div>
+            <div class="center-text" ng-if="prava.admin">
+                <h3>Nový príspevok</h3>
+                <form method="POST">
+                    <label for="date">Tu si vyberte planovany datum aktivity</label><br>
+                    <input type="date" name="date" ng-model="save.date" min="2021-1-1" max="2023-1-1"><br><br>
+                    <label for="activity">Zadajte meno aktivity</label><br>
+                    <input type="text" name="activity" ng-model="save.activity" minlength="1" maxlength="128" placeholder="meno aktivity"><br><br>
+                    <label for="description">Zadajte popis pre aktivitu</label><br>
+                    <textarea ng-model="save.description" minlength="1" maxlength="1000" placeholder="popis aktivity"></textarea><br><br>
+                    <input type="submit" ng-click="pridaj()" value="pridaj">
+                </form>
+            </div>
         </div>
     </body>
 </html>

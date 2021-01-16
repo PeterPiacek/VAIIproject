@@ -1,19 +1,23 @@
 <html>
     <head>
+        <link href="css/login.css" rel="stylesheet">
     </head>
     <body>
-        <h3>prihlasenie</h3>
-        <div ng-controller="login_controler">
-            <div ng-if="prava.admin">
-                <span>testing part</span>
+        <div ng-controller="login_controler" class="login">
+            <div ng-hide class="center-text">
+                <h3 ng-hide="myVar">prihlasenie</h3>
+                <form method="POST">
+                    <div>
+                        <span>meno</span>
+                        <input type="text" name="meno" ng-model="name" placeholder="zadajte meno"  required>
+                    </div>
+                    <div>
+                        <span>heslo</pspan>
+                        <input type="password" name="heslo" ng-model="password" placeholder="zadajte heslo" required>
+                    </div>
+                    <input type="submit" ng-click="kontrolaPrihlasenia()" ng-model="potvrdenie" value="Login">
+                </form>
             </div>
-            <form method="POST">
-                <span>meno</span>
-                <input type="text" name="meno" ng-model="name" placeholder="zadajte meno"  required>
-                <span>heslo</pspan>
-                <input type="password" name="heslo" ng-model="password" placeholder="zadajte heslo" required>
-                <input type="submit" ng-click="kontrolaPrihlasenia()" value="Login">
-            </form>
         </div>
     </body>
 </html>

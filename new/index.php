@@ -8,6 +8,8 @@
 			include "ucivo.html";
 		}else if ($page == "login"){
             include "login.html";
+        }else if ($page == "profily"){
+            include "profily.html";
         }
 	}
 ?>
@@ -49,7 +51,7 @@
             .container-fluid	100%	100%	100%	100%	100%	100%
          -->
     <body class="container" ng-app="mojaApp">
-        <?php 
+        <?php
             include "menu.html";
                 if (!isset($_GET['page']))
                     include "prispevky.html";

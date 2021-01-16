@@ -17,6 +17,8 @@ login_controler = function($scope, $http, prihlasenie) {
             //$scope.admin = result.admin;
             if (result.data) {
                 sessionStorage.prihlaseny = true;
+                sessionStorage.meno = angular.toJson(result.data.name);
+                window.location = "index.php?page=prispevky";
                 if (result.data.admin) {
                     //console.time(ukladam);
                     sessionStorage.admin = angular.toJson(result.data.admin);
@@ -24,14 +26,13 @@ login_controler = function($scope, $http, prihlasenie) {
             }
         });
     }
-    console.log(sessionStorage.admin);
 }
 
 prihlasenie = function() {
-    console.log(angular.fromJson(sessionStorage.prihlaseny));
     return {
         prihlaseny: angular.fromJson(sessionStorage.prihlaseny) != null,
-        admin: angular.fromJson(sessionStorage.admin) == null ? false : angular.fromJson(sessionStorage.admin) == 1 ? true : false
+        admin: angular.fromJson(sessionStorage.admin) == null ? false : angular.fromJson(sessionStorage.admin) == 1 ? true : false,
+        name: angular.fromJson(sessionStorage.meno)
     };
 }
 
