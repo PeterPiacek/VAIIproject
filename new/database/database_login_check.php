@@ -6,21 +6,24 @@
 	$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = $conn->prepare('SELECT name, admin FROM profiles WHERE name LIKE :name and password LIKE :password');
+    $sqlcheck = $conn->prepare('SELECT password FROM profiles WHERE name LIKE :name');
+    $sql = $conn->prepare('SELECT name, admin FROM profiles WHERE name LIKE :name');
+    $sqlcheck->bindParam(':name',$_POST["name"]);
     $sql->bindParam(':name',$_POST["name"]);
-    $sql->bindParam(':password',$_POST["password"]);
-    $sql->execute();
-	/*$res = $conn->query($sql);
-    $rows = array();*/
+
+    $sqlcheck->execute();
+    $check = $sqlcheck->fetch(PDO::FETCH_ASSOC);
+    $hash = $check["password"];
     $rows = [];
-    if ($sql->rowCount() > 0) {
-        $rows = $sql->fetch(PDO::FETCH_ASSOC);
-        /*while ($data = $res->fetch(PDO::FETCH_ASSOC)) {
-            count++
-        }*/
+    if(password_verify($_POST["password"], $hash)){
+        $sql->execute();
+        if ($sql->rowCount() > 0) {
+            $rows = $sql->fetch(PDO::FETCH_ASSOC);
+        } else {
+            $rows = NULL;
+        }
     } else {
         $rows = NULL;
-        //rows[] = "No data";
     }
 
 	header('Content-Type: application/json');

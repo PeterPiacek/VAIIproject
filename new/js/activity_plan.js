@@ -31,6 +31,7 @@ plan_controler = function($scope, $http, prihlasenie) {
         var today = new Date();
         var date = new Date($scope.save.date);
         if ($scope.save.description && $scope.save.activity && $scope.save.date && today <= date) {
+            $scope.idUprava = -1;
             var dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
             $scope.pridavok = $.param({
                 date: dateStr,
@@ -45,7 +46,6 @@ plan_controler = function($scope, $http, prihlasenie) {
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(function(result){
                 $scope.load();
-                //console.log(result);
             });
         }
     }
@@ -86,7 +86,6 @@ plan_controler = function($scope, $http, prihlasenie) {
         var today = new Date();
         var date = new Date($scope.update.date);
         if ($scope.update.description && $scope.update.activity && $scope.update.date && today <= date) {
-            console.log("after if");
             var dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
             $scope.uprava = $.param({
                 id: id,
@@ -99,14 +98,13 @@ plan_controler = function($scope, $http, prihlasenie) {
                 url: 'database/database_plan_update.php',
                 data: $scope.uprava,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).then(function(result){
+            }).then(function(){
                 $scope.load();
             });
         }
     }
 
     $scope.zmena = function() {
-        //console.log($scope.obsahuje);
     }
 }
 
