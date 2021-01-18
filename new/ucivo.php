@@ -2,11 +2,11 @@
     if(isset($_FILES["file"]["tmp_name"]) && isset($_POST["year"])) {
         $name = $_FILES["file"]["name"];
         if($_POST["year"] == 7) {
-            move_uploaded_file($_FILES["file"]["tmp_name"], "downloadables/7/$name.docx");
+            move_uploaded_file($_FILES["file"]["tmp_name"], "downloadables/7/$name");
         } else if ($_POST["year"] == 8) {
-            move_uploaded_file($_FILES["file"]["tmp_name"], "downloadables/8/$name.docx");
+            move_uploaded_file($_FILES["file"]["tmp_name"], "downloadables/8/$name");
         }else if ($_POST["year"] == 9) {
-            move_uploaded_file($_FILES["file"]["tmp_name"], "downloadables/9/$name.docx");
+            move_uploaded_file($_FILES["file"]["tmp_name"], "downloadables/9/$name");
         }
     }
 ?>
@@ -35,7 +35,7 @@
             <div>
                 <ul>
                     <li>
-                        ročnik 7
+                        <span>Ročnik 7</span>
                         <ul>
                         <?php
                         $dir = 'downloadables/7';
@@ -50,14 +50,14 @@
                     </li>
                     <br>
                     <li>
-                        ročnik 8
+                        <span>Ročnik 8</span>
                         <ul>
                         <?php
-                        $dir = 'downloadables/7';
+                        $dir = 'downloadables/8';
                         $files = scandir($dir);
                             foreach ($files as $file) {
                                 if ($file != "." && $file != "..") {
-                                    echo '<li><a href="downloadables/7/'.$file.'" download>'.$file.'</a>';
+                                    echo '<li><a href="downloadables/8/'.$file.'" download>'.$file.'</a>';
                                 }
                             }
                         ?>
@@ -65,14 +65,14 @@
                     </li>
                     <br>
                     <li>
-                        ročnik 9
+                        <span>Ročnik 9</span>
                         <ul>
                         <?php
-                        $dir = 'downloadables/7';
+                        $dir = 'downloadables/9';
                         $files = scandir($dir);
                             foreach ($files as $file) {
                                 if ($file != "." && $file != "..") {
-                                    echo '<li><a href="downloadables/7/'.$file.'" download>'.$file.'</a>';
+                                    echo '<li><a href="downloadables/9/'.$file.'" download>'.$file.'</a>';
                                 }
                             }
                         ?>

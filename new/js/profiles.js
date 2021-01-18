@@ -14,7 +14,6 @@ profiles_controler = function($scope, $http, prihlasenie) {
             method: 'POST',
             url: 'database/database_profiles_load.php',
         }).then(function(result) {
-            console.log(result);
             angular.forEach(result.data, function(item) {
                 $scope.rows.push(
                     {
@@ -28,13 +27,12 @@ profiles_controler = function($scope, $http, prihlasenie) {
     $scope.load();
 
     $scope.pridaj = function() {
-        if ($scope.save.name && $scope.save.password) {
+        if ($scope.save.name && $scope.save.password && (!$scope.save.email || $scope.save.email.endsWith("@stud.sk"))) {
             $scope.pridavok = $.param({
                 name: $scope.save.name,
                 password: $scope.save.password,
                 email: $scope.save.email
             });
-            console.log($scope.pridavok)
             $http({
                 method: 'POST',
                 url: 'database/database_profiles_add.php',
@@ -47,7 +45,6 @@ profiles_controler = function($scope, $http, prihlasenie) {
     }
 
     $scope.zmena = function() {
-        //console.log($scope.obsahuje);
     }
 }
 

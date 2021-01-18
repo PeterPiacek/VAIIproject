@@ -6,7 +6,7 @@
 	$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	$sql = "SELECT * FROM articles";
+	$sql = "SELECT * FROM articles ORDER BY id desc";
 	$res = $conn->query($sql);
 	$rows = array();
 	while ($data = $res->fetch(PDO::FETCH_ASSOC)) {
