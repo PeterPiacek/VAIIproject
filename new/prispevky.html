@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="sk">
+    <head>
+        <title>Prispevky</title>
+        <meta charset="UTF-8">
+        <link href="css/prispevky.css" rel="stylesheet">
+    </head>
+    <body data-ng-app="articles">
+        <div data-ng-controller="article_controler" class="prispevky">
+            <div class="searcher">
+                <input data-ng-change="zmena()" data-ng-model="obsahuje" placeholder="vyhladaj">
+            </div>
+            <div data-ng-repeat="article in rows | filter:obsahuje">
+               <div>
+                    <h3 data-ng-if="idUprava != article.id">{{article.title}}</h3>
+                    <textarea class="d-block" data-ng-if="idUprava == article.id" data-ng-model="update.title"></textarea>
+                    <span data-ng-if="idUprava != article.id">{{article.segment}}</span>
+                    <textarea class="d-block" data-ng-if="idUprava == article.id" data-ng-model="update.segment"></textarea>
+                    <div data-ng-if="prava.admin">
+                        <button type="submit" data-ng-click="zmaz(article.id)" name="Delete">Delete</button>
+                        <button type="submit" data-ng-if="idUprava != article.id" data-ng-click="zacniUpravu(article)" name="uprav">Uprav</button>
+                        <button type="submit" data-ng-if="idUprava == article.id" data-ng-click="ukonciUpravu(article.id)" name="uprav">dokonci</button>
+                    </div>
+                </div>
+            </div>
+            <div class="center-text" data-ng-if="prava.admin">
+                <h4>Nový príspevok</h4>
+                <form method="POST">
+                    <label for="title">Zadajte meno aktivity</label><br>
+                    <input type="text" id="title" name="title" data-ng-model="save.title" minlength="1" maxlength="256" placeholder="titulok"><br><br>
+                    <label for="segment">Zadajte popis pre aktivitu</label><br>
+                    <textarea id="segment" data-ng-model="save.segment" minlength="1" maxlength="1000" placeholder="članok"></textarea><br><br>
+                    <input type="submit" data-ng-click="pridaj()" value="pridaj">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="sk">
+    <head>
+        <meta charset="UTF-8">
+        <title>profily</title>
+        <link href="css/profily.css" rel="stylesheet">
+    </head>
+    <body>
+        <div data-ng-controller="profiles_controler" class="profily">
+            <div data-ng-if="prava.admin">
+                <div class="center-text">
+                    <h3>Nový učet</h3>
+                    <form method="POST">
+                        <label for="name">meno</label>
+                        <input type="text" id="name" name="name" data-ng-model="save.name" minlength="1" maxlength="32" placeholder="meno"><br><br>
+                        <label for="password">heslo</label>
+                        <input type="password" id="password" name="password" data-ng-model="save.password" minlength="1" maxlength="256" placeholder="heslo"><br><br>
+                        <label for="email">email</label>
+                        <input type="text" id="email" name="email" data-ng-model="save.email" minlength="1" maxlength="256" placeholder="email"><br><br>
+                        <input type="submit" data-ng-click="pridaj()" value="pridaj">
+                    </form>
+                </div>
+                <br>
+                <div class="center-text">
+                    <h3>Existujúce účty</h3>
+                    <div class="searcher">
+                        <input data-ng-change="zmena()" data-ng-model="obsahuje" placeholder="vyhladaj">
+                    </div>
+                    <table class="center d-none d-sm-inline-block">
+                        <thead>
+                            <tr>
+                                <td>Meno</td>
+                                <td>Email</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="ucet in rows | filter:obsahuje">
+                                <td>{{ucet.meno}}</td>
+                                <td>{{ucet.mail}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="center d-inline-block d-sm-none">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody data-ng-repeat="ucet in rows | filter:obsahuje">
+                            <tr>
+                                <td>Meno</td>
+                                <td>{{ucet.meno}}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid black;">
+                                <td>Email</td>
+                                <td>{{ucet.mail}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div data-ng-if="!prava.admin">
+                nice try
+            </div>
+        </div>
+    </body>
+</html>

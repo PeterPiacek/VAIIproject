@@ -1,5 +1,4 @@
 <?php
-
 	function loadPage($page) {
 		if ($page == "plan_aktivit"){
 			include "plan_aktivit.php";

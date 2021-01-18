@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="sk">
+    <head>
+        <title>Plan</title>
+        <meta charset="UTF-8">
+        <link href="css/plan.css" rel="stylesheet">
+    </head>
+    <body data-ng-app="activity_plan">
+        <div data-ng-controller="plan_controler" class="plan d-block">
+            <div class="searcher">
+                <input data-ng-change="zmena()" data-ng-model="obsahuje" placeholder="vyhladaj">
+            </div>
+            <table class="center d-none d-sm-inline-block">
+                <thead>
+                    <tr>
+                        <td>Dátum</td>
+                        <td>Akcia</td>
+                        <td>Popis</td>
+                        <td data-ng-if="prava.admin">Funkcie</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="plan in rows | filter:obsahuje">
+                        <td>
+                            <div data-ng-if="idUprava != plan.id">
+                                {{plan.datum}}
+                            </div>
+                            <div data-ng-if="idUprava == plan.id">
+                                <input type="date" data-ng-model="update.date" value="{{plan.datum}}">
+                            </div>
+                        </td>
+                        <td>
+                            <div data-ng-if="idUprava != plan.id">
+                                {{plan.akcia}}
+                            </div>
+                            <div data-ng-if="idUprava == plan.id">
+                                <textarea data-ng-model="update.activity"></textarea>
+                            </div>
+                        </td>
+                        <td>
+                            <div data-ng-if="idUprava != plan.id">
+                                {{plan.popis}}
+                            </div>
+                            <div data-ng-if="idUprava == plan.id">
+                                <textarea data-ng-model="update.description"></textarea>
+                            </div>
+                        </td>
+                        <td data-ng-if="prava.admin">
+                            <form method="POST" class="d-inline">
+                                <button data-ng-click="zmaz(plan.id)" name="Delete">Delete</button>
+                                <div data-ng-if="idUprava != plan.id">
+                                    <button data-ng-click="zacniUpravu(plan)" name="uprav">Uprav</button>
+                                </div>
+                                <div data-ng-if="idUprava == plan.id">
+                                    <button data-ng-click="ukonciUpravu(plan.id)" name="uprav">dokonci</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="center d-inline-block d-sm-none">
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody data-ng-repeat="plan in rows | filter:obsahuje">
+                    <tr>
+                        <td>dátum</td>
+                        <td>
+                            <div data-ng-if="idUprava != plan.id">
+                                {{plan.datum}}
+                            </div>
+                            <div data-ng-if="idUprava == plan.id">
+                                <input type="date" data-ng-model="update.date" value="{{plan.datum}}">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>akcia</td>
+                        <td>
+                            <div data-ng-if="idUprava != plan.id">
+                                {{plan.akcia}}
+                            </div>
+                            <div data-ng-if="idUprava == plan.id">
+                                <textarea data-ng-model="update.activity"></textarea>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border-bottom: 1px solid black;">
+                            <div data-ng-if="idUprava != plan.id">
+                                {{plan.popis}}
+                            </div>
+                            <div data-ng-if="idUprava == plan.id">
+                                <textarea data-ng-model="update.description"></textarea>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-ng-if="prava.admin" colspan="2" style="border-bottom: 1px solid black;">
+                            <form method="POST" class="d-inline">
+                                <button data-ng-click="zmaz(plan.id)" name="Delete">Delete</button>
+                                <div data-ng-if="idUprava != plan.id">
+                                    <button data-ng-click="zacniUpravu(plan)" name="uprav">Uprav</button>
+                                </div>
+                                <div data-ng-if="idUprava == plan.id">
+                                    <button data-ng-click="ukonciUpravu(plan.id)" name="uprav">dokonci</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="center-text" data-ng-if="prava.admin">
+                <h3>Nový príspevok</h3>
+                <form method="POST">
+                    <label for="date">Tu si vyberte planovany datum aktivity</label><br>
+                    <input type="date" id="date" name="date" data-ng-model="save.date"><br><br>
+                    <label for="activity">Zadajte meno aktivity</label><br>
+                    <input type="text" id="activity" name="activity" data-ng-model="save.activity" minlength="1" maxlength="128" placeholder="meno aktivity"><br><br>
+                    <label for="description">Zadajte popis pre aktivitu</label><br>
+                    <textarea id="description" data-ng-model="save.description" minlength="1" maxlength="1000" placeholder="popis aktivity"></textarea><br><br>
+                    <input type="submit" data-ng-click="pridaj()" value="pridaj">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
