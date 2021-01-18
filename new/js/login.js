@@ -13,14 +13,11 @@ login_controler = function($scope, $http, prihlasenie) {
             data: $scope.udaje,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(result) {
-            //$scope.name = result.name;
-            //$scope.admin = result.admin;
             if (result.data) {
                 sessionStorage.prihlaseny = true;
                 sessionStorage.meno = angular.toJson(result.data.name);
                 window.location = "index.php?page=prispevky";
                 if (result.data.admin) {
-                    //console.time(ukladam);
                     sessionStorage.admin = angular.toJson(result.data.admin);
                 }
             }
